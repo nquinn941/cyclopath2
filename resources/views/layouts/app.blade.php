@@ -2,14 +2,24 @@
 <html lang ="en">
 
     <head>
-        <title>Cyclopath - @yield('title')</title>
+        @include('includes.head')
     </head>
 
     <body>
-        <h1>Cyclopath - @yield('title')</h1>
+        <div class="containter">
 
-        <div>
-            @yield('content')
+            <header class = "row">
+
+                @include('includes.header')
+            </header>
+
+            <div id="main" class="row">
+                @yield('content') 
+            </div>
+
+            <footer class ="row">
+                @include('includes.footer')   
+            </footer>
         </div>
     </body>
 </html>
