@@ -93,4 +93,15 @@ class PostController extends Controller
         $posts = Post::all();
         return $posts;
     }
+
+    public function apiStore(Request $request)
+    {
+        $post = new Post;
+        $post -> user_id =20;
+        $post -> content = $request['content'];
+        $post -> rating = "0";
+        $post -> save();
+
+        return $post;
+    }
 }
