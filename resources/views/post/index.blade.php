@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html>
-<head> 
-    <title> Posts </title>
-</head> 
+<head>
+    <title>Posts</title>
+</head>
 
 <body>
-    <script src ="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src ="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <h1>Post</h1>
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <Script src = "https://unpkg.com/axios/dist/axios.min.js"></script>
     <div id ="root">
         <ul>
-            <li v-for="post in posts">@{{post.content}}</li>
-        </ul>
-    
-        <h2> New Post </h2>
-        Post content: <input type="text" id= "input" v-model="newPostContent">
+            <li v-for="post in posts">@{{ post.content }}</li>
+        </ul>  
+
+        <h2>New Post</h2>
+        Post content: <input type ="text" id="input" v-model="newPostContent">
         <button @click="createPost">Create</button>
     </div>
 
-    <script>    
+    <script>
         var app = new Vue({
-            el: "#root",
-            data: {
-                posts: [],
+            el:"#root",
+            data:{
+                posts:[],
                 newPostContent: '',
             },
             mounted(){
-                axios.get("{{ route ('api.post.index')}}")
+                axios.get("{{route ('api.posts.index')}}")
+                .then(response=>{
+                    this.posts =response.data;
+                })
+                .catch(response=>{
+                    console.log(response);
+                })
+            },
+
+            methods:{
+                createPost: function(){
+                    axios.post("{{route('api.posts.store')}}",{
+                        content:this.newPostContent
+                    })
                     .then(response=>{
-                        this.posts =response.data;
+                        this.posts.push(response.data);
+                        this.newPostContent= '';
                     })
                     .catch(response=>{
                         console.log(response);
                     })
-                
-            },
-            methods:{
-                createPost:function(){
-                    axios.post("{{ route('api.post.store')}}",{
-                        content: this.newPostContent
-                    })
-                    .then(response => {
-                        this.posts.push(response.data);
-                        this.newPostContent ='';
-                    })
-                    .catch(response =>{
-                        console.log(response);
-                    })
                 }
             }
-                
         });
     </script>
 </body>
-</hmtl>
+</html>

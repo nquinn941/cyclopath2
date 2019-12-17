@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('post.index',['posts'=>$posts]);
     }
 
     /**
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -35,19 +36,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'content' =>'required|max:1023',
+        ]);
+
+        return "Passed Validation";
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -103,5 +98,11 @@ class PostController extends Controller
         $post -> save();
 
         return $post;
+    }
+
+    public function show($id)
+    {
+        $post=Post::findOrFail($id);
+        return view('post.show',['post' => $post]);
     }
 }
