@@ -34,7 +34,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = new Post;
-        $post -> user_id =20;
+        $post -> user_id =Auth::user()->id;
         $post -> content = $request['content'];
         $post -> rating = "0";
         $post -> save();
@@ -93,8 +93,6 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        $comments = Comment::orderBy('id', 'desc')->where('post_id', $post->id)->get();
-        
-        return view('posts.show')->with('post', $post)->with('comments', $comments); 
+        return view('post.show')->with('post', $post);
     }
 }

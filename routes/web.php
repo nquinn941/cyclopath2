@@ -30,3 +30,4 @@ Route::post('posts','PostController@store')->name('post.store');
 
 Route::get('post/create','PostController@create')->name('posts.create');
 
+
