@@ -33,12 +33,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post;
-        $post -> user_id =Auth::user()->id;
-        $post -> content = $request['content'];
-        $post -> rating = "0";
-        $post -> save();
-        return redirect()->route('post.index');
+        if(Auth::check()){
+            $validatedData = $request->validate([
+                'content'=>'required',
+            ]);
+            $post = new Post;
+            $post -> user_id =Auth::user()->id;
+            $post -> content = $validatedData['content'];
+            $post -> rating = "0";
+            $post -> save();
+            return redirect()->route('post.index')->with('message','Post Created');
+        }
+
+        else{
+            return redirect()->route('login');
+        }
+        
     }
     /**
      * Show the form for editing the specified resource.
@@ -67,9 +77,14 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        
+        $post = Post::findOrFail($id);
+        if(($post->user_id)==Auth::user()->id){
+            $post->delete();
+        }
+        return redirect()->route('post.index');
     }
     public function page()
     {

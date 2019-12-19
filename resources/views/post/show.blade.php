@@ -1,12 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+
     <ul>
         <li>ID: {{$post->id}}</li>
         <li>User ID: {{$post->user_id}}</li>
         <li>Content: {{$post->content}}</li>
         <li>Rating: {{$post->rating}}</li>
     </ul>
+
+    <form method="POST"
+            action="{{ route('posts.destroy', ['id' => $post->id])}}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+        </form>
 
     <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <Script src = "https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -40,11 +48,13 @@
                         content:this.newCommentContent    
                     })
                     .then(response=>{
+                        
                         this.comments.push(response.data);
                         this.newCommentContent= '';
                     })
-                    .catch(response=>{
-                        console.log(response);
+                    .catch(error=>{
+                        this.newCommentContent= '';
+                        console.log(error.response);
                     })
                 }
             }
