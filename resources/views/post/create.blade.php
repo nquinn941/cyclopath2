@@ -7,4 +7,5 @@
     <p>Content: <input type ="text" name="content"></p>
     <input type="submit" value="Submit">
     </form>
+
 @endsection

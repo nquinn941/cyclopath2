@@ -13,7 +13,7 @@
             @csrf
             @method('DELETE')
             <button type="submit">Delete</button>
-        </form>
+    </form>
 
     <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <Script src = "https://unpkg.com/axios/dist/axios.min.js"></script>

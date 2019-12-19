@@ -49,6 +49,7 @@ class PostController extends Controller
             $post -> rating = "0";
             $post -> save();
             return redirect()->route('post.index')->with('message','Post Created');
+            session()->flash('message', 'Post Was Created.');
         }
 
         else{
@@ -75,7 +76,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        if(($post->user_id)==Auth::user()->id){
+            $post->content = $request['content'];
+            $post->save();
+        }
+        return redirect()->route('post.index');
+
+
     }
     /**
      * Remove the specified resource from storage.

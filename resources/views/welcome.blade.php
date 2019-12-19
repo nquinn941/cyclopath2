@@ -87,12 +87,7 @@
                 <div class="links">
                     <a href="http://cyclopath.test/post/create">Add Post</a>
                     <a href="http://cyclopath.test/posts">View All Posts</a>
-                    <a href="{{ route('post.users', ['id' => Auth::User()->id])}}">View Users Posts</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ route('post.users', ['id' => Auth::User()->id])}}">View Your Posts</a>
                 </div>
             </div>
         </div>
