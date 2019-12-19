@@ -12,25 +12,23 @@
     <Script src = "https://unpkg.com/axios/dist/axios.min.js"></script>
     <div id ="root">
         <ul>
-            <li v-for="post in posts">@{{ post.content }}</li>
+            <li v-for="comment in comments">@{{ comment.content }}</li>
         </ul>  
-
-        <h2>New Post</h2>
-        Post content: <input type ="text" id="input" v-model="newPostContent">
-        <button @click="createPost">Create</button>
+        Comment content: <input type ="text" id="input" v-model="newCommentContent">
+        <button @click="createComment">Create</button>
     </div>
 
     <script>
         var app = new Vue({
             el:"#root",
             data:{
-                posts:[],
-                newPostContent: '',
+                comments:[],
+                newCommentContent: '',
             },
             mounted(){
-                axios.get("{{route ('api.posts.index')}}")
+                axios.get("{{route ('api.comments.index',['id' => $post->id])}}")
                 .then(response=>{
-                    this.posts =response.data;
+                    this.comments =response.data;
                 })
                 .catch(response=>{
                     console.log(response);
@@ -38,7 +36,7 @@
             },
             methods:{
                 createPost: function(){
-                    axios.post("{{route('api.posts.store')}}",{
+                    axios.post("{{route('api.comments.store',['id' => $post->id])}}",{
                         content:this.newPostContent
                     })
                     .then(response=>{

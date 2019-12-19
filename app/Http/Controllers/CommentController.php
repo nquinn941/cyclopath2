@@ -19,10 +19,27 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $c = new Comment;
-        $c->user_id = 1;
-        $c->post_id = 20;
+        $c->user_id = Auth::user()->id;
+        $c->post_id = 1;
         $c->content = $request['content'];
         $c->rating = 0;
         $c->save();
+
+    }
+
+    public function apiStore(Request $request)
+    {
+        $c = new Comment;
+        $c->user_id = Auth::user()->id;
+        $c->post_id = 1;
+        $c->content = $request['content'];
+        $c->rating = 0;
+        $c->save();
+    }
+
+    public function apiIndex($id)
+    {
+        $comments = Comment::get()->where('post_id',$id);
+        return $comments;
     }
 }
