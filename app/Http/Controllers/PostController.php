@@ -16,6 +16,12 @@ class PostController extends Controller
         $posts = Post::all();
         return view('post.index', ['posts' => $posts]);
     }
+
+    public function userPosts($id)
+    {
+        $posts = Post::get()->where('user_id',$id);
+        return view ('post.user',['posts'=>$posts]);
+    }
     /**
      * Show the form for creating a new resource.
      *

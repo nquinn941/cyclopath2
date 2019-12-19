@@ -33,4 +33,8 @@ Route::get('post/create','PostController@create')->name('posts.create');
 
 Route::delete('posts/{id}','PostController@destroy')->name('posts.destroy');
 
+Route::get('/posts/users/{id}','PostController@userPosts')->name('post.users');
+
+
+
 

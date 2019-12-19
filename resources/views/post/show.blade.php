@@ -3,9 +3,8 @@
 @section('content')
 
     <ul>
-        <li>ID: {{$post->id}}</li>
-        <li>User ID: {{$post->user_id}}</li>
-        <li>Content: {{$post->content}}</li>
+        <li>Posted by User Number: {{$post->user_id}}</li>
+        <li><b>{{$post->content}}</b></li>
         <li>Rating: {{$post->rating}}</li>
     </ul>
 
@@ -20,10 +19,11 @@
     <Script src = "https://unpkg.com/axios/dist/axios.min.js"></script>
     <div id ="root">
         <ul>
-            <li v-for="comment in comments">@{{ comment.content }}</li>
+            <li><b>Comments</b></li>
+            <li v-for="comment in comments">@{{ comment.content + " - User Number: " + comment.user_id }}</li>
         </ul>  
-        Comment content: <input type ="text" id="input" v-model="newCommentContent">
-        <button @click="createComment">Create</button>
+        Add Comment: <input type ="text" id="input" v-model="newCommentContent">
+        <button @click="createComment">Post</button>
     </div>
 
     <script>
@@ -48,7 +48,6 @@
                         content:this.newCommentContent    
                     })
                     .then(response=>{
-                        
                         this.comments.push(response.data);
                         this.newCommentContent= '';
                     })
