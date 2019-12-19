@@ -69,6 +69,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/logout') }}">Logout</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -87,7 +88,7 @@
                 <div class="links">
                     <a href="http://cyclopath.test/post/create">Add Post</a>
                     <a href="http://cyclopath.test/posts">View All Posts</a>
-                    <a href="{{ route('post.users', ['id' => Auth::User()->id])}}">View Your Posts</a>
+                    
                 </div>
             </div>
         </div>
