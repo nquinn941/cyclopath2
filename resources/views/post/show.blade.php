@@ -35,13 +35,13 @@
                 })
             },
             methods:{
-                createPost: function(){
+                createComment: function(){
                     axios.post("{{route('api.comments.store',['id' => $post->id])}}",{
-                        content:this.newPostContent
+                        content:this.newCommentContent    
                     })
                     .then(response=>{
-                        this.posts.push(response.data);
-                        this.newPostContent= '';
+                        this.comments.push(response.data);
+                        this.newCommentContent= '';
                     })
                     .catch(response=>{
                         console.log(response);

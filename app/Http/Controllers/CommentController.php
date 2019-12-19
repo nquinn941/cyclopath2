@@ -30,11 +30,12 @@ class CommentController extends Controller
     public function apiStore(Request $request)
     {
         $c = new Comment;
-        $c->user_id = Auth::user()->id;
+        $c->user_id = 1;
         $c->post_id = 1;
         $c->content = $request['content'];
         $c->rating = 0;
         $c->save();
+        return $c;
     }
 
     public function apiIndex($id)
